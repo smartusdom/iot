@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+
+  socks5:
+    image: serjs/go-socks5-proxy
+    container_name: socks5
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 1080:1080
+    networks:
+      - backend
+      
+networks:
+  backend:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.16.0/24
