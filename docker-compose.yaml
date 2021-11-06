@@ -52,7 +52,7 @@ services:
     restart: always
     links:
       - influx:influx
-    user: '472'
+    user: "472:0"
     networks:
       - backend
     volumes:
