@@ -48,7 +48,7 @@ services:
     image:  grafana/grafana:latest
     container_name: grafana
     ports:
-      - 127.0.0.1:3000:3000
+      3000:3000
     restart: always
     links:
       - influx:influx
@@ -56,25 +56,7 @@ services:
     networks:
       - backend
     volumes:
-      #- ./conf/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/rabbitmq.yaml
-      #- ./conf/grafana/datasources.yml:/etc/grafana/provisioning/datasources/prometheus.yaml
-      #- ./conf/grafana/dashboards:/dashboards
       - ./data/grafana:/var/lib/grafana
-    environment:
-      # https://grafana.com/plugins/flant-statusmap-panel
-      # https://grafana.com/plugins/grafana-piechart-panel
-      # https://grafana.com/plugins/grafana-polystat-panel
-      # https://grafana.com/plugins/jdbranham-diagram-panel
-      # https://grafana.com/plugins/michaeldmoore-multistat-panel
-      # https://grafana.com/plugins/vonage-status-panel
-      # https://grafana.com/plugins/yesoreyeram-boomtable-panel
-      #- GF_INSTALL_PLUGINS=flant-statusmap-panel,grafana-piechart-panel,grafana-polystat-panel,jdbranham-diagram-panel,michaeldmoore-multistat-panel,vonage-status-panel,yesoreyeram-boomtable-panel,camptocamp-prometheus-alertmanager-datasource,natel-influx-admin-panel
-      - GF_SECURITY_COOKIE_SECURE="true"
-      #- GF_SERVER_DOMAIN=smartusdom.ru
-      - GF_SERVER_ROOT_URL=http://localhost:3000
-      - GF_DEFAULT_INSTANCE_NAME=iotserv
-      - GF_AUTH_PROXY_ENABLED=false
-      - GF_USERS_ALLOW_SIGN_UP=false
     depends_on:
       - influx    
   
