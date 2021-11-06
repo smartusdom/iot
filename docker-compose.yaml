@@ -13,7 +13,7 @@ services:
       - backend
       
   influx:
-    image: influxdb:1.8-alpine
+    image: influxdb:latest
     container_name: influx
     restart: always
     env_file:
