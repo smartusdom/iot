@@ -13,7 +13,7 @@ services:
       - backend
       
   influx:
-    image: influxdb:latest
+    image: influxdb:1.8-alpine
     container_name: influx
     restart: always
     env_file:
@@ -58,7 +58,23 @@ services:
     volumes:
       - ./data/grafana:/var/lib/grafana
     depends_on:
-      - influx    
+      - influx
+
+  portainer:
+    image: portainer/portainer:latest
+    container_name: portainer
+    restart: always
+    command: -H unix:///var/run/docker.sock
+    environment:
+      - VIRTUAL_HOST=influx
+    ports:
+      - 127.0.0.1:8000:8000
+      - 127.0.0.1:9000:9000
+    networks:
+      - backend
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data/portainer:/data
   
 networks:
   backend:
