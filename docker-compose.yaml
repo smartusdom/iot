@@ -65,8 +65,6 @@ services:
     container_name: portainer
     restart: always
     command: -H unix:///var/run/docker.sock
-    environment:
-      - VIRTUAL_HOST=influx
     ports:
       - 127.0.0.1:8000:8000
       - 127.0.0.1:9000:9000
