@@ -77,6 +77,22 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./data/portainer:/data
+
+      
+# https://github.com/kylemanna/docker-openvpn/blob/master/docs/docker-compose.md
+# docker-compose run --rm openvpn ovpn_genconfig -u udp://VPN.SERVERNAME.COM
+# docker-compose run --rm openvpn ovpn_initpki      
+
+  openvpn:
+    cap_add:
+     - NET_ADMIN
+    image: kylemanna/openvpn
+    container_name: openvpn
+    ports:
+     - "1194:1194/udp"
+    restart: always
+    volumes:
+     - ./data/openvpn:/etc/openvpn
   
 networks:
   backend:
