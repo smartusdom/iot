@@ -89,6 +89,11 @@ services:
       - backend
     volumes:
       - ./data/grafana:/var/lib/grafana
+    environment:
+      - GF_SECURITY_COOKIE_SECURE="true"
+      - GF_SERVER_DOMAIN=smartusdom.ru
+      - GF_SERVER_ROOT_URL=https://smartusdom.ru/manager/grafana/
+      - GF_DEFAULT_INSTANCE_NAME=smartusdom
     depends_on:
       - influx
 
